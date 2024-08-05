@@ -1,3 +1,5 @@
+import { createChart } from "./transport.js";
+
 document.getElementById('weightForm').addEventListener('submit', function(e) {  
     e.preventDefault();
     const date = document.getElementById('date').value;
@@ -9,10 +11,10 @@ document.getElementById('weightForm').addEventListener('submit', function(e) {
         localStorage.setItem('weights', JSON.stringify(weights));
         displayWeights();
     }
-    startWeight(); 
 });
 
 function displayWeights() {
+    createChart();
     const weights = JSON.parse(localStorage.getItem('weights')) || [];
     const weightList = document.getElementById('weightList');
     weightList.innerHTML = '';
@@ -35,15 +37,4 @@ function calculateProgress(weights) {
     }
 }
 
-function startWeight(){
-    console.log("test")
-    const startWeight = document.getElementById("startWeight");
-    if(!JSON.parse(localStorage.getItem('weights'))){      
-        startWeight.removeAttribute("hidden");
-    }else{
-        startWeight.setAttribute("hidden", true);
-    }
-}
-
 displayWeights();
-startWeight();

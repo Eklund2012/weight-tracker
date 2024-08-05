@@ -24,3 +24,6 @@ Thumbs.db
 
 # Ignore tests
 charts_test
+
+# Extra
+.parcel-cache
