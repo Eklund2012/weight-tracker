@@ -14,8 +14,9 @@ document.getElementById('weightForm').addEventListener('submit', function(e) {
 });
 
 function displayWeights() {
-    createChart();
     const weights = JSON.parse(localStorage.getItem('weights')) || [];
+    createChart(weights);
+
     const weightList = document.getElementById('weightList');
     weightList.innerHTML = '';
 

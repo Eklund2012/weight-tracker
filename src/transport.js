@@ -1,29 +1,67 @@
 import Chart from 'chart.js/auto';
 
-export function createChart() {
-    console.log("in tranport")
-    const data = [
-        { year: 2010, count: 10 },
-        { year: 2011, count: 20 },
-        { year: 2012, count: 15 },
-        { year: 2013, count: 25 },
-        { year: 2014, count: 22 },
-        { year: 2015, count: 30 },
-        { year: 2016, count: 28 },
-    ];
+let chartInstance = null;
 
-    new Chart(
+export function createChart(weightData) {
+
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+
+    weightData.forEach((entry) => {
+        console.log(entry.weight)
+    });
+
+    const data = weightData.map(entry => ({
+        weight: entry.weight,
+        date: entry.date
+    }));
+
+    chartInstance = new Chart(
         document.getElementById('canvas1'),
         {
             type: 'line',
             data: {
-                labels: data.map(row => row.year),
+                labels: data.map(row => row.date),
                 datasets: [
                     {
-                        label: 'Acquisitions by year',
-                        data: data.map(row => row.count)
+                        label: 'Weight graph',
+                        data: data.map(row => row.weight),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 3,
+                        radius: 15,
+                        hoverRadius: 18,
+                        hoverBorderWidth: 1
                     }
                 ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Weight'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                      position: 'top',
+                    },
+                    title: {
+                      display: true,
+                      text: (ctx) => 'Weight Chart ' + ctx.chart.data.datasets[0].pointStyle,
+                    }
+                  }
             }
         }
     );
