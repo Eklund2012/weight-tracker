@@ -7,7 +7,7 @@
 
 <body>
     <h1>Weight Tracker</h1>
-    <h2 id="startWeight" hidden>Enter your start weight (kg)</h2>
+    <h2>Track your weight progress and achieve your goals!</h2>
     <form id="weightForm">
         <label for="date">Date:</label>
         <input type="date" id="date" required>
@@ -18,9 +18,11 @@
     <div>
         <ul id="weightList"></ul>
     </div>
-    <div>
-        <canvas id="canvas1" width="400" height="50" aria-label="Hello ARIA World" role="img"></canvas>
+    <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+        <canvas id="canvas1" ></canvas>
     </div>
+
+    <p id="progress"></p> <!-- Added progress display -->
 
     <script type="module" src="../src/app.js"></script>
 </body>

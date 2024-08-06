@@ -17,6 +17,11 @@ export function createChart(weightData) {
         date: entry.date
     }));
 
+    if (data.length === 0) return; // Check if data is empty
+
+    const startingWeight = data[0].weight;
+    const maxWeight = startingWeight + 50;
+
     chartInstance = new Chart(
         document.getElementById('canvas1'),
         {
@@ -26,9 +31,12 @@ export function createChart(weightData) {
                 datasets: [
                     {
                         label: 'Weight graph',
+                        color: 'rgba(0, 0, 0, 0)',
                         data: data.map(row => row.weight),
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 3,
+                        backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderCapStyle: "round",
+                        borderColor: 'rgba(0, 0, 0, 1)',
+                        borderWidth: 4,                        
                         radius: 15,
                         hoverRadius: 18,
                         hoverBorderWidth: 1
@@ -42,24 +50,39 @@ export function createChart(weightData) {
                         display: true,
                         title: {
                             display: true,
-                            text: 'Date'
+                            text: 'Date',
+                            color: 'rgba(0, 0, 0, 1)',
                         }
                     },
                     y: {
+                        min: 0,
+                        max: maxWeight,
+                        ticks: {
+                            callback: value => `${value} kg`
+                        },
                         display: true,
                         title: {
                             display: true,
-                            text: 'Weight'
+                            text: 'Weight',
+                            color: 'rgba(0, 0, 0, 1)',
                         }
                     }
                 },
                 plugins: {
                     legend: {
                       position: 'top',
+                      labels: {
+                        // This more specific font property overrides the global property
+                        font: {
+                            size: 20,
+                            family: "Arial",
+                        }
+                    }
                     },
                     title: {
                       display: true,
-                      text: (ctx) => 'Weight Chart ' + ctx.chart.data.datasets[0].pointStyle,
+                      text: 'Weight Chart ',
+                      color: 'rgba(0, 0, 0, 1)',
                     }
                   }
             }

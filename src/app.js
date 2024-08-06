@@ -1,6 +1,6 @@
 import { createChart } from "./transport.js";
 
-document.getElementById('weightForm').addEventListener('submit', function(e) {  
+document.getElementById('weightForm').addEventListener('submit', function (e) {
     e.preventDefault();
     const date = document.getElementById('date').value;
     const weight = document.getElementById('weight').value;
@@ -10,6 +10,9 @@ document.getElementById('weightForm').addEventListener('submit', function(e) {
         weights.push({ date, weight: parseFloat(weight) });
         localStorage.setItem('weights', JSON.stringify(weights));
         displayWeights();
+        // Clear form inputs
+        document.getElementById('date').value = '';
+        document.getElementById('weight').value = '';
     }
 });
 
@@ -35,6 +38,12 @@ function calculateProgress(weights) {
         const end = weights[weights.length - 1].weight;
         const progress = end - start;
         console.log(`Progress: ${progress} kg`);
+
+        // Display progress
+        document.getElementById('progress').textContent = `Progress: ${progress} kg`;
+    } else {
+        // Clear progress display if there's not enough data
+        document.getElementById('progress').textContent = '';
     }
 }
 
