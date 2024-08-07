@@ -8,10 +8,6 @@ export function createChart(weightData) {
         chartInstance.destroy();
     }
 
-    weightData.forEach((entry) => {
-        console.log(entry.weight)
-    });
-
     const data = weightData.map(entry => ({
         weight: entry.weight,
         date: entry.date
@@ -23,7 +19,6 @@ export function createChart(weightData) {
     const maxWeight = startingWeight + 50;
 
     const superColor = document.getElementById("exampleColorInput").value;
-    console.log("test", superColor);
 
     chartInstance = new Chart(
         document.getElementById('canvas1'),
@@ -36,7 +31,7 @@ export function createChart(weightData) {
                         label: 'Weight graph',
                         color: 'rgba(0, 0, 0, 0)',
                         data: data.map(row => row.weight),
-                        backgroundColor: 'rgba(0, 0, 0, 0)',
+                        backgroundColor: 'rgba(0, 0, 0, 0)', //transparent bkg of chart cirle
                         borderCapStyle: "round",
                         borderColor: superColor,
                         borderWidth: 4,                        
