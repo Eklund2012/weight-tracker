@@ -22,6 +22,9 @@ export function createChart(weightData) {
     const startingWeight = data[0].weight;
     const maxWeight = startingWeight + 50;
 
+    const superColor = document.getElementById("exampleColorInput").value;
+    console.log("test", superColor);
+
     chartInstance = new Chart(
         document.getElementById('canvas1'),
         {
@@ -35,7 +38,7 @@ export function createChart(weightData) {
                         data: data.map(row => row.weight),
                         backgroundColor: 'rgba(0, 0, 0, 0)',
                         borderCapStyle: "round",
-                        borderColor: 'rgba(0, 0, 0, 1)',
+                        borderColor: superColor,
                         borderWidth: 4,                        
                         radius: 15,
                         hoverRadius: 18,

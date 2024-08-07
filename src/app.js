@@ -5,7 +5,7 @@ document.getElementById('weightForm').addEventListener('submit', function (e) {
     const date = document.getElementById('date').value;
     const weight = document.getElementById('weight').value;
 
-    if (date && weight) {
+    if (date && weight && weight > 0) {
         let weights = JSON.parse(localStorage.getItem('weights')) || [];
         weights.push({ date, weight: parseFloat(weight) });
         localStorage.setItem('weights', JSON.stringify(weights));
