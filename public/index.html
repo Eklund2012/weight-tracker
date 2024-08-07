@@ -3,6 +3,7 @@
 
 <head>
     <title>Weight Tracker</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
@@ -24,7 +25,11 @@
         <canvas id="canvas1" ></canvas>
     </div>
 
-    <p id="progress"></p> <!-- Added progress display -->
+    <p id="progress"></p> <!-- progress display -->
+
+    <button id="exportData">Export Data</button>
+    <input type="file" id="importData">
+
 
     <script type="module" src="../src/app.js"></script>
 </body>

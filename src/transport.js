@@ -70,7 +70,6 @@ export function createChart(weightData) {
                     legend: {
                       position: 'top',
                       labels: {
-                        // This more specific font property overrides the global property
                         font: {
                             size: 20,
                             family: "Arial",
