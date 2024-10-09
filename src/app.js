@@ -1,4 +1,5 @@
 import { createChart } from "./transport.js";
+import { createPie } from "./transport.js";
 
 document.getElementById('weightForm').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -24,6 +25,7 @@ document.getElementById('weightForm').addEventListener('submit', function (e) {
 function displayWeights() {
     const weights = JSON.parse(localStorage.getItem('weights')) || [];
     createChart(weights);
+    createPie(weights);
 
     const weightList = document.getElementById('weightList');
     weightList.innerHTML = '';
@@ -34,6 +36,8 @@ function displayWeights() {
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
+        deleteButton.classList.add("btn")
+        deleteButton.classList.add("btn-danger")
         deleteButton.addEventListener('click', () => {
             weights.splice(index, 1);
             localStorage.setItem('weights', JSON.stringify(weights));

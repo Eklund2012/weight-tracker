@@ -1,6 +1,43 @@
 import Chart from 'chart.js/auto';
 
 let chartInstance = null;
+let pieInstance = null;
+
+function createPieData(weight) {
+    data = {
+        datasets: [{
+            data: [10, 20, 30]
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+            'Carbs',
+            'Protein',
+            'Fat'
+        ]
+    };
+    return data;
+}
+
+export function createPie(weightData) {
+    if (pieInstance) {
+        pieInstance.destroy();
+    }
+
+
+
+    const currWeight = weightData[weightData.length - 1].weight;
+
+    data = createPieData(currWeight)
+
+    pieInstance = new Chart(
+        document.getElementById('canvas2'),
+        {
+            type: 'pie',
+            data: data,
+        }
+    )
+}
 
 export function createChart(weightData) {
 
@@ -18,7 +55,7 @@ export function createChart(weightData) {
     const startingWeight = data[0].weight;
     const maxWeight = startingWeight + 50;
 
-    const superColor = document.getElementById("exampleColorInput").value;
+    const superColor = "#563d7c"
 
     chartInstance = new Chart(
         document.getElementById('canvas1'),
@@ -34,7 +71,7 @@ export function createChart(weightData) {
                         backgroundColor: 'rgba(0, 0, 0, 0)', //transparent bkg of chart cirle
                         borderCapStyle: "round",
                         borderColor: superColor,
-                        borderWidth: 4,                        
+                        borderWidth: 4,
                         radius: 15,
                         hoverRadius: 18,
                         hoverBorderWidth: 1
@@ -68,20 +105,20 @@ export function createChart(weightData) {
                 },
                 plugins: {
                     legend: {
-                      position: 'top',
-                      labels: {
-                        font: {
-                            size: 20,
-                            family: "Arial",
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 20,
+                                family: "Arial",
+                            }
                         }
-                    }
                     },
                     title: {
-                      display: true,
-                      text: 'Weight Chart ',
-                      color: 'rgba(0, 0, 0, 1)',
+                        display: true,
+                        text: 'Weight Chart ',
+                        color: 'rgba(0, 0, 0, 1)',
                     }
-                  }
+                }
             }
         }
     );
